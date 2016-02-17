@@ -33,7 +33,7 @@ process_args ()
             * ) usage;;
         esac
     done
-    
+
     case "$min_output$integration_tests" in
         "00" ) npm_command="npm -s test";;
         "01" ) npm_command="npm -s run lint && npm -s run alltest";;
@@ -88,6 +88,9 @@ lint_and_test $node_root/device/transport/mqtt
 [ $? -eq 0 ] || exit $?
 
 lint_and_test $node_root/service
+[ $? -eq 0 ] || exit $?
+
+lint_and_test $node_root/e2etests
 [ $? -eq 0 ] || exit $?
 
 cd $node_root/../tools/iothub-explorer
